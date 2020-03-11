@@ -20,3 +20,7 @@ transform = new_matrix()
 # print_matrix( make_rotZ(math.pi/4) )
 
 parse_file( 'script', edges, transform, screen, color )
+#for x in range(100):
+#    for y in range(100):
+#        draw_line(0,y,x,0,screen,color)
+#parse_file( 'cute.txt', edges, transform, screen, color )

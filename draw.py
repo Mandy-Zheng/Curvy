@@ -3,17 +3,43 @@ from matrix import *
 
 
 def add_circle( points, cx, cy, cz, r, step ):
-    theta=0
-    t=0
-    while t<=1:
-        theta= 2*math.pi*t
-        add_point(points,r*math.cos(theta)+cx,r*math.sin(theta)+cy,z)
+    theta=0.0
+    t=0.0
+    x=r*math.cos(theta)+cx
+    y=r*math.sin(theta)+cy
+    while t <= 1:
         t+=step
+        theta= 2*math.pi*t
+        x0=r*math.cos(theta)+cx
+        y0=r*math.sin(theta)+cy
+        add_edge(points,x,y,cz,x0,y0,cz)
+        x=x0
+        y=y0
 
+
+'''def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
+    t=step
+    xco=generate_curve_coefs(x0,x1,x2,x3,curve_type)
+    yco=generate_curve_coefs(y0,y1,y2,y3,curve_type)
+    while t<=1:
+        x1=xco[0][0]*t**3+xco[0][1]*t**2+xco[0][2]*t+xco[0][3]
+        y1=yco[0][0]*t**3+yco[0][1]*t**2+yco[0][2]*t+yco[0][3]
+        add_edge(points,x0,y0,0,x1,y1,0)
+        x0=x1
+        y0=y1
+        t+=step'''
 
 def add_curve( points, x0, y0, x1, y1, x2, y2, x3, y3, step, curve_type ):
-    pass
-
+    t = 0.0
+    x_coefs = generate_curve_coefs(x0,x1,x2,x3,curve_type)
+    y_coefs = generate_curve_coefs(y0,y1,y2,y3,curve_type)
+    while t <= 1:
+        t += step
+        x1 = x_coefs[0][0] * t**3 + x_coefs[0][1] * t**2 + x_coefs[0][2] * t + x_coefs[0][3]
+        y1 = y_coefs[0][0] * t**3 + y_coefs[0][1] * t**2 + y_coefs[0][2] * t + y_coefs[0][3]
+        add_edge(points,x0,y0,0,x1,y1,0)
+        x0 = x1
+        y0 = y1
 
 def draw_lines( matrix, screen, color ):
     if len(matrix) < 2:
