@@ -18,7 +18,7 @@ transform = new_matrix()
 # print_matrix( make_rotY(math.pi/4) )
 # print
 # print_matrix( make_rotZ(math.pi/4) )
-
+print("face.png")
 parse_file( 'script', edges, transform, screen, color )
 #for x in range(100):
 #    for y in range(100):
